@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js" integrity="sha512-VGxuOMLdTe8EmBucQ5vYNoYDTGijqUsStF6eM7P3vA/cM1pqOwSBv/uxw94PhhJJn795NlOeKBkECQZ1gIzp6A==" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container text-center" id="btn-utenti" style="padding:10px"></div>
+  <div id="profilo"></div>
+  <script>
+    function mostraUtente(user){
+      document.querySelector('#profilo').innerText = user.name
+    }
+
+    axios
+    .get("https://jsonplaceholder.typicode.com/users")
+    .then(response =>{
+        console.log(response)
+        response.data.forEach(user => {
+          console.log(user.name);
+          let userButton = document.createElement('button')
+          document.querySelector("#btn-utenti").appendChild(userButton);
+          userButton.innerText = user.name;
+          userButton.onclick = function(){
+            mostraUtente(user)
+          }
+        });
+    });
+  </script> 
+</body>
+</html>
